@@ -1,5 +1,4 @@
 # Demetra Server
-author: [@gkkconan](https://github.com/gkkconan)
 
 ## Description
 Demetra server is a powerful and flexible server software designed to handle every task efficiently. Built with Node.js, Apollo Server, and GraphQL, it can be used for both small and large deployments, thanks to its scalability and high performance.
@@ -45,3 +44,6 @@ curl --request POST \
 
 ## License
 This project is licensed under the [GNU General Public License v3.0](https://github.com/demetra-project/server/blob/main/LICENSE).
+
+## Credits
+This project was developed and is maintained by [gkkconan](https://github.com/gkkconan).
