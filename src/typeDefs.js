@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require('graphql-tag');
 
 const typeDefs = gql`
   type SensorData {
@@ -8,12 +8,10 @@ const typeDefs = gql`
     gas: Float!
     createdAt: String!
   }
-
   type Query {
     allSensorData: [SensorData!]!
     sensorData(id: Int!): SensorData
   }
-
   type Mutation {
     addSensorData(temperature: Float!, humidity: Float!, gas: Float!): SensorData!
   }
