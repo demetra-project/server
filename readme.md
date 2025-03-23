@@ -15,7 +15,7 @@ DB_DIALECT=mysql              # Dialect for the database (MySQL)
 ```
 
 ## Installation
-To install Demetra Server, follow these steps:
+To install Demetra server, follow these steps:
 1. Clone the repository:
    ```bash
    git clone https://github.com/demetra-project/server.git
@@ -34,13 +34,29 @@ To install Demetra Server, follow these steps:
    ```
 
 ## Usage
-To fetch all sensor data, you can use the following [curl](https://curl.se/) command:
-```bash
-curl --request POST \
-  --header 'content-type: application/json' \
-  --url http://localhost:4000/graphql \
-  --data '{"query": "{allSensorData { id temperature humidity gas createdAt } }" }'
-```
+Here are some examples on how to use Demetra server:
+
+- To fetch all sensor data, you can use the following [curl](https://curl.se/) command:
+    ```bash
+    curl --request POST \
+    --header 'content-type: application/json' \
+    --url http://localhost:4000/graphql \
+    --data '{"query": "{ allSensorData { id temperature humidity gas createdAt } }" }'
+    ```
+- To retrieve just one record from the sensor data, you can use the following [curl](https://curl.se/) command:
+    ```bash
+    curl --request POST \
+    --header 'content-type: application/json' \
+    --url http://localhost:4000/graphql \
+    --data '{"query": "{ sensorData(id: 1) { id temperature humidity gas createdAt } }" }'
+    ```
+- To add a new sensor data record, you can use the following [curl](https://curl.se/) command:
+    ```bash
+    curl --request POST \
+    --header 'content-type: application/json' \
+    --url http://localhost:4000/graphql \
+    --data '{  "query": "mutation { addSensorData(temperature: 25.0, humidity: 50.0, gas: 100.0) { id temperature humidity gas createdAt } }"}'
+    ```
 
 ## License
 This project is licensed under the [GNU General Public License v3.0](https://github.com/demetra-project/server/blob/main/LICENSE).
