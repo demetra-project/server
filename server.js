@@ -1,31 +1,49 @@
-const { ApolloServer } = require('apollo-server-express');
+const { ApolloServer } = require('@apollo/server');
+const { expressMiddleware } = require('@apollo/server/express4');
 const { sequelize } = require('./src/db.config');
 const typeDefs = require('./src/typeDefs');
 const resolvers = require('./src/resolvers');
 const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+require('dotenv').config();
 
 async function startServer() {
   const app = express();
+
+  // create Apollo Server instance
   const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
-    context: ({ req }) => ({ req }),
-    introspection: true,
-    playground: true
+    introspection: process.env.NODE_ENV !== 'production',
+    includeStacktraceInErrorResponses: process.env.NODE_ENV !== 'production',
   });
 
-  await apolloServer.start();
-  apolloServer.applyMiddleware({ app });
+  await apolloServer.start(); // apply middleware after starting server
 
-  try {
+  // configure CORS and body parser
+  app.use('/graphql',
+    cors({
+      origin: process.env.CLIENT_ORIGIN || 'http://localhost:3000',
+      credentials: true
+    }),
+    bodyParser.json(),
+    expressMiddleware(apolloServer, { context: async ({ req }) => ({ req }) })
+  );
+
+  // database connection
+  try{
     await sequelize.authenticate();
-    await sequelize.sync();
+    await sequelize.sync({ force: process.env.NODE_ENV !== 'production' }); // if development, drop and recreate tables
     console.log('Database connected successfully');
   }
   catch(error){ console.error('Database connection error:', error); }
 
-  app.listen({ port: 4000 }, () => {
-    console.log(`Server ready at http://localhost:4000${apolloServer.graphqlPath}`);
+  // start server
+  const PORT = process.env.PORT || 4000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`GraphQL endpoint: http://localhost:${PORT}/graphql`);
   });
 }
 
