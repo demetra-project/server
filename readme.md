@@ -13,6 +13,10 @@ DB_USER="..."                 # Database username
 DB_PASSWORD="..."             # Database password
 DB_DIALECT=mysql              # Dialect for the database (MySQL)
 ```
+Then if you want to import the example database, run the following command:
+```bash
+mysql -u [user] -p < demetra.sql
+```
 
 ## Installation
 To install Demetra server, follow these steps:
