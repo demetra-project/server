@@ -12,8 +12,11 @@ DB_NAME="..."                 # Name of your database
 DB_USER="..."                 # Database username
 DB_PASSWORD="..."             # Database password
 DB_DIALECT=mysql              # Dialect for the database (MySQL)
+NODE_ENV="..."                # "development" or "production"
 ```
-Then if you want to import the example database, run the following command:
+If the environment variable `NODE_ENV` is set to `development`, the server will default drop and recreate the database tables.
+
+Then import the database:
 ```bash
 mysql -u [user] -p < demetra.sql
 ```
