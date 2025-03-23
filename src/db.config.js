@@ -7,14 +7,9 @@ const sequelize = new Sequelize(
   process.env.DB_PASSWORD,
   {
     host: process.env.DB_HOST,
-    dialect: process.env.DB_DIALECT,
-    port: process.env.DB_PORT || 3306,
-    dialectOptions: { connectTimeout: 60000 },
+    dialect: 'mysql',
     logging: process.env.NODE_ENV === 'development' ? console.log : false
   }
 );
 
-module.exports = {
-  sequelize,
-  Sequelize
-};
+module.exports = { sequelize };
