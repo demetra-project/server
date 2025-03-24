@@ -14,6 +14,7 @@ const typeDefs = gql`
   }
   type Mutation {
     addSensorData(temperature: Float!, humidity: Float!, gas: Float!): SensorData!
+    editSensorData(id: Int!, temperature: Float!, humidity: Float!, gas: Float!): SensorData!
   }
 `;
 

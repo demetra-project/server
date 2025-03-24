@@ -9,6 +9,12 @@ const resolvers = {
   Mutation: {
     addSensorData: async (_, { temperature, humidity, gas }) => {
       return await SensorData.create({ temperature, humidity, gas }, { raw: true });
+    },
+    editSensorData: async (_, { id, temperature, humidity, gas }) => {
+      const sensorData = await SensorData.findByPk(id);
+      if (!sensorData) throw new Error('Sensor data not found');
+      await sensorData.update({ temperature, humidity, gas });
+      return sensorData;
     }
   }
 };
