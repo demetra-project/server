@@ -13,6 +13,7 @@ DB_USER="..."                 # Database username
 DB_PASSWORD="..."             # Database password
 DB_DIALECT=mysql              # Dialect for the database (MySQL)
 NODE_ENV="..."                # "development" or "production"
+CLIENT_ORIGIN="..."           # the client url, if not set, the server will default to 127.0.0.1:8080
 ```
 If the environment variable `NODE_ENV` is set to `development`, the server will default drop and recreate the database tables.
 
