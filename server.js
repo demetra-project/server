@@ -22,9 +22,9 @@ async function startServer() {
   await apolloServer.start(); // apply middleware after starting server
 
   // configure CORS and body parser
-  app.use('/graphql',
+  app.use('/',
     cors({
-      origin: process.env.CLIENT_ORIGIN || 'http://localhost:3000',
+      origin: process.env.CLIENT_ORIGIN || 'http://127.0.0.1:8080',
       credentials: true
     }),
     bodyParser.json(),
@@ -43,7 +43,7 @@ async function startServer() {
   const PORT = process.env.PORT || 4000;
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    console.log(`GraphQL endpoint: http://localhost:${PORT}/graphql`);
+    console.log(`GraphQL endpoint: http://localhost:${PORT}/`);
   });
 }
 
