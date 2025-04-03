@@ -2,19 +2,31 @@ const { gql } = require('graphql-tag');
 
 const typeDefs = gql`
   type SensorData {
-    id: Int!
+    id: ID!
     temperature: Float!
     humidity: Float!
     gas: Float!
     createdAt: String!
   }
+  type Recognitions {
+    id: ID!
+    object: String!
+    quantity: Int!
+    createdAt: String!
+  }
   type Query {
     allSensorData: [SensorData!]!
-    sensorData(id: Int!): SensorData
+    sensorData(id: ID!): SensorData
+
+    allRecognitions: [Recognitions!]!
+    recognition(id: ID!): Recognitions
   }
   type Mutation {
     addSensorData(temperature: Float!, humidity: Float!, gas: Float!): SensorData!
-    editSensorData(id: Int!, temperature: Float!, humidity: Float!, gas: Float!): SensorData!
+    editSensorData(id: ID!, temperature: Float!, humidity: Float!, gas: Float!): SensorData!
+
+    addObject(object: String!, quantity: Int!): Recognitions!
+    editObject(id: ID!, object: String!, quantity: Int!): Recognitions!
   }
 `;
 
