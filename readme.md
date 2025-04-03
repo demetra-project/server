@@ -42,29 +42,58 @@ To install Demetra server, follow these steps:
    ```
 
 ## Usage
-Here are some examples on how to use Demetra server:
+Here are some examples on how to use Demetra server using [cURL](https://curl.se/):
 
-- To fetch all sensor data, you can use the following [curl](https://curl.se/) command:
+- To fetch all sensor data:
     ```bash
     curl --request POST \
     --header 'content-type: application/json' \
     --url http://localhost:4000/graphql \
     --data '{"query": "{ allSensorData { id temperature humidity gas createdAt } }" }'
     ```
-- To retrieve just one record from the sensor data, you can use the following [curl](https://curl.se/) command:
+- To retrieve just one record from the sensor data:
     ```bash
     curl --request POST \
     --header 'content-type: application/json' \
     --url http://localhost:4000/graphql \
     --data '{"query": "{ sensorData(id: 1) { id temperature humidity gas createdAt } }" }'
     ```
-- To add a new sensor data record, you can use the following [curl](https://curl.se/) command:
+- To add a new sensor data record:
     ```bash
     curl --request POST \
     --header 'content-type: application/json' \
     --url http://localhost:4000/graphql \
     --data '{  "query": "mutation { addSensorData(temperature: 25.0, humidity: 50.0, gas: 100.0) { id temperature humidity gas createdAt } }"}'
     ```
+- To fetch all recognitions:
+  ```bash
+    curl --request POST \
+    --header 'content-type: application/json' \
+    --url http://localhost:4000/graphql \
+    --data '{"query": "{ allRecognitions { id object quantity createdAt } }" }'
+    ```
+  - To retrive just one record from the recognitions data by id:
+  ```bash
+    curl --request POST \
+    --header 'content-type: application/json' \
+    --url http://localhost:4000/graphql \
+    --data '{"query": "{ recognition(id: 1) { id object quantity createdAt } }" }'
+    ```
+- To add a new object into the database:
+  ```bash
+    curl --request POST \
+    --header 'content-type: application/json' \
+    --url http://localhost:4000/graphql \
+    --data '{  "query": "mutation { addObject(object: \"object_name\", quantity: 1) { id temperature humidity gas createdAt } }"}'
+    ```
+- To edit an object recognized info by id:
+  ```bash
+  curl --request POST \
+  --header 'content-type: application/json' \
+  --url http://localhost:4000/graphql \
+  --data '{ "query": "mutation { editObject(id: 1, object: \"new_name\", quantity: 2) { id object quantity createdAt } }"}'
+    ```
+
 
 ## License
 This project is licensed under the [GNU General Public License v3.0](https://github.com/demetra-project/server/blob/main/LICENSE).
