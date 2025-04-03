@@ -84,7 +84,7 @@ Here are some examples on how to use Demetra server using [cURL](https://curl.se
     curl --request POST \
     --header 'content-type: application/json' \
     --url http://localhost:4000/graphql \
-    --data '{  "query": "mutation { addObject(object: \"object_name\", quantity: 1) { id temperature humidity gas createdAt } }"}'
+    --data '{  "query": "mutation { addObject(object: \"object_name\", quantity: 1) { id object quantity createdAt } }"}'
     ```
 - To edit an object recognized info by id:
   ```bash
@@ -93,7 +93,6 @@ Here are some examples on how to use Demetra server using [cURL](https://curl.se
   --url http://localhost:4000/graphql \
   --data '{ "query": "mutation { editObject(id: 1, object: \"new_name\", quantity: 2) { id object quantity createdAt } }"}'
     ```
-
 
 ## License
 This project is licensed under the [GNU General Public License v3.0](https://github.com/demetra-project/server/blob/main/LICENSE).
