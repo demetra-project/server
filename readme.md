@@ -84,14 +84,14 @@ Here are some examples on how to use Demetra server using [cURL](https://curl.se
     curl --request POST \
     --header 'content-type: application/json' \
     --url http://localhost:4000/graphql \
-    --data '{  "query": "mutation { addObject(name: \"object_name\", quantity: 1) { id object quantity createdAt } }"}'
+    --data '{  "query": "mutation { addObject(name: \"object_name\", quantity: 1) { id name quantity createdAt } }"}'
     ```
 - To edit an object recognized info by id:
   ```bash
   curl --request POST \
   --header 'content-type: application/json' \
   --url http://localhost:4000/graphql \
-  --data '{ "query": "mutation { editObject(id: 1, name: \"new_name\", quantity: 2) { id object quantity createdAt } }"}'
+  --data '{ "query": "mutation { editObject(id: 1, name: \"new_name\", quantity: 2) { id name quantity createdAt } }"}'
     ```
 
 ## License
