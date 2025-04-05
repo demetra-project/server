@@ -70,28 +70,28 @@ Here are some examples on how to use Demetra server using [cURL](https://curl.se
     curl --request POST \
     --header 'content-type: application/json' \
     --url http://localhost:4000/graphql \
-    --data '{"query": "{ allRecognitions { id object quantity createdAt } }" }'
+    --data '{"query": "{ allRecognitions { id name quantity createdAt } }" }'
     ```
   - To retrive just one record from the recognitions data by id:
   ```bash
     curl --request POST \
     --header 'content-type: application/json' \
     --url http://localhost:4000/graphql \
-    --data '{"query": "{ recognition(id: 1) { id object quantity createdAt } }" }'
+    --data '{"query": "{ recognition(id: 1) { id name quantity createdAt } }" }'
     ```
 - To add a new object into the database:
   ```bash
     curl --request POST \
     --header 'content-type: application/json' \
     --url http://localhost:4000/graphql \
-    --data '{  "query": "mutation { addObject(object: \"object_name\", quantity: 1) { id object quantity createdAt } }"}'
+    --data '{  "query": "mutation { addObject(name: \"object_name\", quantity: 1) { id object quantity createdAt } }"}'
     ```
 - To edit an object recognized info by id:
   ```bash
   curl --request POST \
   --header 'content-type: application/json' \
   --url http://localhost:4000/graphql \
-  --data '{ "query": "mutation { editObject(id: 1, object: \"new_name\", quantity: 2) { id object quantity createdAt } }"}'
+  --data '{ "query": "mutation { editObject(id: 1, name: \"new_name\", quantity: 2) { id object quantity createdAt } }"}'
     ```
 
 ## License
