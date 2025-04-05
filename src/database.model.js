@@ -12,7 +12,7 @@ const SensorData = sequelize.define('sensors_data', {
 });
 
 const Recognitions = sequelize.define('recognitions', {
-    object: DataTypes.TEXT(),
+    name: DataTypes.TEXT(),
     quantity: DataTypes.INTEGER(),
     created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
   }, {

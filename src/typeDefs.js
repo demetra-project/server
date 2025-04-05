@@ -10,7 +10,7 @@ const typeDefs = gql`
   }
   type Recognitions {
     id: ID!
-    object: String!
+    name: String!
     quantity: Int!
     createdAt: String!
   }
@@ -25,8 +25,8 @@ const typeDefs = gql`
     addSensorData(temperature: Float!, humidity: Float!, gas: Float!): SensorData!
     editSensorData(id: ID!, temperature: Float!, humidity: Float!, gas: Float!): SensorData!
 
-    addObject(object: String!, quantity: Int!): Recognitions!
-    editObject(id: ID!, object: String!, quantity: Int!): Recognitions!
+    addObject(name: String!, quantity: Int!): Recognitions!
+    editObject(id: ID!, name: String!, quantity: Int!): Recognitions!
   }
 `;
 

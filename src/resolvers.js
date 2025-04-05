@@ -13,8 +13,8 @@ const resolvers = {
     addSensorData: async (_, { temperature, humidity, gas }) => {
       return await SensorData.create({ temperature, humidity, gas });
     },
-    addObject: async (_, { object, quantity }) => {
-      return await Recognitions.create({ object, quantity });
+    addObject: async (_, { name, quantity }) => {
+      return await Recognitions.create({ name, quantity });
     },
     editSensorData: async (_, { id, temperature, humidity, gas }) => {
       const sensorData = await SensorData.findByPk(id);
@@ -22,15 +22,15 @@ const resolvers = {
       await sensorData.update({ temperature, humidity, gas });
       return sensorData;
     },
-    editObject: async (_, { id, object, quantity }) => {
-      if (!id || object === undefined || quantity === undefined) {
-        throw new Error("Missing required parameters: id, object, or quantity.");
+    editObject: async (_, { id, name, quantity }) => {
+      if (!id || name === undefined || quantity === undefined) {
+        throw new Error("Missing required parameters: id, name, or quantity.");
       }
 
       const recognition = await Recognitions.findByPk(id);
       if (!recognition) throw new Error("Object not found");
 
-      return await recognition.update({ object, quantity });
+      return await recognition.update({ name, quantity });
     }
   }
 };
