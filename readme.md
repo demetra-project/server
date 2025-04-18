@@ -42,6 +42,11 @@ To install Demetra server, follow these steps:
    pnpm start
    ```
 
+To set up the Docker container, after setting up the environment variables, run:
+   ```bash
+   docker-compose up
+   ```
+
 ## Usage
 Here are some examples on how to use Demetra server using [cURL](https://curl.se/):
 
