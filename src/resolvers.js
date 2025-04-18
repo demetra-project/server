@@ -14,6 +14,12 @@ const resolvers = {
       return await SensorData.create({ temperature, humidity, gas });
     },
     addObject: async (_, { name, quantity }) => {
+      const existing = await Recognitions.findOne({ where: { name } });
+      if(existing){
+        existing.quantity += quantity;
+        await existing.save();
+        return existing;
+      }
       return await Recognitions.create({ name, quantity });
     },
     editSensorData: async (_, { id, temperature, humidity, gas }) => {
