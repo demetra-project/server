@@ -1,0 +1,35 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: demetra_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  server:
+    build: .
+    container_name: demetra_server
+    restart: always
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DIALECT: ${DB_DIALECT}
+    volumes:
+      - .:/app
+
+volumes:
+  db_data:
