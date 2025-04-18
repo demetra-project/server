@@ -10,6 +10,7 @@ require('dotenv').config();
 
 async function startServer() {
   const app = express();
+  app.use(express.json());
 
   // create Apollo Server instance
   const apolloServer = new ApolloServer({
