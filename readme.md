@@ -6,7 +6,7 @@ Demetra server is a powerful and flexible server software designed to handle eve
 ## Configuration
 Before starting the server, create a .env file in the root directory of the project. Below is a sample .env configuration:
 ```plaintext
-DB_HOST="localhost"           # Database host address
+DB_HOST="localhost"           # Database host address, set demetra_db if using Docker
 DB_PORT=3306                  # Database port (default for MySQL)
 DB_NAME="..."                 # Name of your database
 DB_USER="..."                 # Database username
@@ -14,6 +14,7 @@ DB_PASSWORD="..."             # Database password
 DB_DIALECT=mysql              # Dialect for the database (MySQL)
 NODE_ENV="..."                # "development" or "production"
 CLIENT_ORIGIN="..."           # the client url, if not set, the server will default to 127.0.0.1:8080
+MYSQL_ROOT_PASSWORD="..."     # MySQL root password for Docker
 ```
 If the environment variable `NODE_ENV` is set to `development`, the server will default drop and recreate the database tables.
 
