@@ -5,9 +5,9 @@ RUN npm install -g pnpm
 
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install
+RUN if [ "$NODE_ENV" = "production" ]; then pnpm install --prod; else pnpm install; fi
 COPY . .
 
 EXPOSE 4000
 
-CMD ["pnpm", "start"]
+CMD sh -c 'if [ "$NODE_ENV" = "production" ]; then pnpm run start:prod; else pnpm run start; fi'

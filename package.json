@@ -7,6 +7,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
+    "start:prod": "pm2 start server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -22,6 +23,7 @@
     "graphql-http": "^1.22.4",
     "graphql-tag": "^2.12.6",
     "mysql2": "^3.14.0",
+    "pm2": "^6.0.5",
     "sequelize": "^6.37.7"
   },
   "pnpm": {
