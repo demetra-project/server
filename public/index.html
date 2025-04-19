@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demetra Server</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="container">
+    <h1>Queries for Sensor and Object Data</h1>
+
+  <script>
+  const queries = [
+    {
+      'name': 'allSensorData',
+      'title': 'To fetch all sensor data',
+      'query': 'curl --request POST \n--header \'content-type: application/json\' \n--url http://localhost:4000/graphql \n--data \'{"query": "{ allSensorData { id temperature humidity gas createdAt } }" }\''
+    },
+    {
+      'name': 'sensorData',
+      'title': 'To fetch a sensor data',
+      'query': 'curl --request POST \n--header \'content-type: application/json\' \n--url http://localhost:4000/graphql \n--data \'{"query": "{ sensorData(id: 1) { id temperature humidity gas createdAt } }" }\''
+    },
+    {
+      'name': 'addSensorData',
+      'title': 'To add a sensor data',
+      'query': 'curl --request POST \n--header \'content-type: application/json\' \n--url http://localhost:4000/graphql \n--data \'{"query": "{ addSensorData(temperature: 25, humidity: 60, gas: 100) { id temperature humidity gas createdAt } }" }\''
+    },
+    {
+      'name': 'allRecognitions',
+      'title': 'To fetch all recognitions',
+      'query': 'curl --request POST \n--header \'content-type: application/json\' \n--url http://localhost:4000/graphql \n--data \'{"query": "{ allRecognitions { id name createdAt } }" }\''
+    },
+    {
+      'name': 'recognition',
+      'title': 'To fetch a recognition',
+      'query': 'curl --request POST \n--header \'content-type: application/json\' \n--url http://localhost:4000/graphql \n--data \'{"query": "{ recognition(id: 1) { id name quantity createdAt } }" }\''
+    },
+    {
+      'name': 'addObject',
+      'title': 'to add a new object record',
+      'query': 'curl --request POST \n--header \'content-type: application/json\' \n--url http://localhost:4000/graphql \n--data \'{  "query": "mutation { addObject(name: \\"object_name\\", quantity: 1) { id name quantity createdAt } }"}\''
+    },
+    {
+      'name': 'editObject',
+      'title': 'to edit an existing object record',
+      'query': 'curl --request POST \n--header \'content-type: application/json\' \n--url http://localhost:4000/graphql \n--data \'{  "query": "mutation { editObject(id: 1, name: \\"new_name\\", quantity: 2) { id name quantity createdAt } }"}\''
+    }
+  ]
+
+  function copyToClipboard(id, button) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      button.disabled = true;
+      button.textContent = 'Copied';
+      setTimeout(() => { button.textContent = 'Copy'; button.disabled = false; }, 1500);
+    }).catch(err => console.error('Copy failed:', err));
+  }
+
+  queries.forEach(query => {
+    const queryDiv = document.createElement('div');
+    const header = document.createElement('h2');
+    const codeBlock = document.createElement('div');
+    const copyButton = document.createElement('button');
+    const preElement = document.createElement('pre');
+
+    queryDiv.classList.add('query');
+    header.textContent = query.title;
+    queryDiv.appendChild(header);
+    codeBlock.classList.add('code-block');
+    copyButton.classList.add('copy-btn');
+    copyButton.textContent = 'Copy';
+    copyButton.addEventListener('click', function() {
+      copyToClipboard(query.name, copyButton);
+    });
+    codeBlock.appendChild(copyButton);
+    preElement.id = query.name;
+    preElement.textContent = query.query;
+
+    codeBlock.appendChild(preElement);
+    queryDiv.appendChild(codeBlock);
+    container.appendChild(queryDiv);
+  });
+  </script>
+
+</body>
+</html>

@@ -5,12 +5,13 @@ const typeDefs = require('./src/typeDefs');
 const resolvers = require('./src/resolvers');
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
+const path = require('path');
 require('dotenv').config();
 
-async function startServer() {
+async function startServer(){
   const app = express();
   app.use(express.json());
+  app.use(express.static('public'));
 
   // create Apollo Server instance
   const apolloServer = new ApolloServer({
@@ -22,13 +23,15 @@ async function startServer() {
 
   await apolloServer.start(); // apply middleware after starting server
 
-  // configure CORS and body parser
+  // default web page with endpoints list
+  app.get('/', (req, res) => { res.sendFile(path.join(__dirname, 'public/index.html')); });
+
+  // Configure CORS and Apollo Server middleware
   app.use('/',
     cors({
       origin: process.env.CLIENT_ORIGIN || 'http://127.0.0.1:8080',
       credentials: true
     }),
-    bodyParser.json(),
     expressMiddleware(apolloServer, { context: async ({ req }) => ({ req }) })
   );
 
