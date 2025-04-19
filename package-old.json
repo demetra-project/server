@@ -4,20 +4,14 @@
   "description": "",
   "author": "gkkconan",
   "license": "GPL-3.0-or-later",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/demetra-project/server.git"
-  },
-  "bugs": {
-    "url": "https://github.com/demetra-project/server/issues"
-  },
-  "homepage": "https://github.com/demetra-project/server#readme",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "start:prod": "pm2 start server.js --no-daemon",
-    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
+  "packageManager": "pnpm@10.8.1",
   "dependencies": {
     "@apollo/server": "^4.12.0",
     "@graphql-tools/schema": "^10.0.23",
@@ -30,5 +24,13 @@
     "mysql2": "^3.14.0",
     "pm2": "^6.0.5",
     "sequelize": "^6.37.7"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@apollo/protobufjs"
+    ]
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
   }
 }
