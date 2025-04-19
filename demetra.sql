@@ -17,6 +17,11 @@ CREATE TABLE IF NOT EXISTS recognitions (
 );
 
 
+CREATE USER IF NOT EXISTS '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASSWORD}';
+GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'%';
+FLUSH PRIVILEGES;
+
+
 -- INITIAL DATA
 
 -- INSERT INTO sensors_data (id, temperature, humidity, gas, created_at) VALUES
