@@ -55,21 +55,21 @@ Here are some examples on how to use Demetra server using [cURL](https://curl.se
     curl --request POST \
     --header 'content-type: application/json' \
     --url http://localhost:4000/graphql \
-    --data '{"query": "{ allSensorData { id temperature humidity gas createdAt } }" }'
+    --data '{"query": "{ allSensorData { id temperature humidity gas gps_lat gps_lon createdAt } }" }'
     ```
 - To retrieve just one record from the sensor data:
     ```bash
     curl --request POST \
     --header 'content-type: application/json' \
     --url http://localhost:4000/graphql \
-    --data '{"query": "{ sensorData(id: 1) { id temperature humidity gas createdAt } }" }'
+    --data '{"query": "{ sensorData(id: 1) { id temperature humidity gas gps_lat gps_lon createdAt } }" }'
     ```
 - To add a new sensor data record:
     ```bash
     curl --request POST \
     --header 'content-type: application/json' \
     --url http://localhost:4000/graphql \
-    --data '{  "query": "mutation { addSensorData(temperature: 25.0, humidity: 50.0, gas: 100.0) { id temperature humidity gas createdAt } }"}'
+    --data '{  "query": "mutation { addSensorData(temperature: 25.0, humidity: 50.0, gas: 100.0, gps_lat: 40.7128, gps_lon: -74.0060) { id temperature humidity gas gps_lat gps_lon createdAt } }"}'
     ```
 - To fetch all recognitions:
   ```bash

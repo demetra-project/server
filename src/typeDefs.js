@@ -6,6 +6,8 @@ const typeDefs = gql`
     temperature: Float!
     humidity: Float!
     gas: Float!
+    gps_lat: Float!
+    gps_lon: Float!
     createdAt: String!
   }
   type Recognitions {
@@ -22,8 +24,8 @@ const typeDefs = gql`
     recognition(id: ID!): Recognitions
   }
   type Mutation {
-    addSensorData(temperature: Float!, humidity: Float!, gas: Float!): SensorData!
-    editSensorData(id: ID!, temperature: Float!, humidity: Float!, gas: Float!): SensorData!
+    addSensorData(temperature: Float!, humidity: Float!, gas: Float!, gps_lat: Float!, gps_lon: Float!): SensorData!
+    editSensorData(id: ID!, temperature: Float!, humidity: Float!, gas: Float!, gps_lat: Float!, gps_lon: Float!): SensorData!
 
     addObject(name: String!, quantity: Int!): Recognitions!
     editObject(id: ID!, name: String!, quantity: Int!): Recognitions!
