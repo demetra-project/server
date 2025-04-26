@@ -2,33 +2,49 @@ const { gql } = require('graphql-tag');
 
 const typeDefs = gql`
   type SensorData {
-    id: ID!
     temperature: Float!
     humidity: Float!
     gas: Float!
     gps_lat: Float!
     gps_lon: Float!
-    createdAt: String!
+    created_at: String!
   }
   type Recognitions {
     id: ID!
-    name: String!
-    quantity: Int!
-    createdAt: String!
+    object_name: String!
+    object_quantity: Int!
+    gps_lat: Float!
+    gps_lon: Float!
+    sensor_created_at: String!
+    created_at: String!
   }
+
   type Query {
     allSensorData: [SensorData!]!
-    sensorData(id: ID!): SensorData
+    sensorData(gps_lat: Float!, gps_lon: Float!, created_at: String): [SensorData!]!
 
     allRecognitions: [Recognitions!]!
-    recognition(id: ID!): Recognitions
+    recognition(gps_lat: Float!, gps_lon: Float!, created_at: String): [Recognitions!]!
   }
-  type Mutation {
-    addSensorData(temperature: Float!, humidity: Float!, gas: Float!, gps_lat: Float!, gps_lon: Float!): SensorData!
-    editSensorData(id: ID!, temperature: Float!, humidity: Float!, gas: Float!, gps_lat: Float!, gps_lon: Float!): SensorData!
 
-    addObject(name: String!, quantity: Int!): Recognitions!
-    editObject(id: ID!, name: String!, quantity: Int!): Recognitions!
+  type Mutation {
+    addSensorData(
+      temperature: Float!,
+      humidity: Float!,
+      gas: Float!,
+      gps_lat: Float!,
+      gps_lon: Float!,
+      created_at: String!
+    ): SensorData!
+
+    addObject(
+      object_name: String!,
+      object_quantity: Int!,
+      gps_lat: Float!,
+      gps_lon: Float!,
+      sensor_created_at: String!,
+      created_at: String
+    ): Recognitions!
   }
 `;
 
