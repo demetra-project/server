@@ -50,54 +50,41 @@ To set up the Docker container, after setting up the environment variables, run:
 ## Usage
 Here are some examples on how to use Demetra server using [cURL](https://curl.se/):
 
-- To fetch all sensor data:
-    ```bash
-    curl --request POST \
-    --header 'content-type: application/json' \
-    --url http://localhost:4000/graphql \
-    --data '{"query": "{ allSensorData { id temperature humidity gas gps_lat gps_lon createdAt } }" }'
-    ```
-- To retrieve just one record from the sensor data:
-    ```bash
-    curl --request POST \
-    --header 'content-type: application/json' \
-    --url http://localhost:4000/graphql \
-    --data '{"query": "{ sensorData(id: 1) { id temperature humidity gas gps_lat gps_lon createdAt } }" }'
-    ```
-- To add a new sensor data record:
-    ```bash
-    curl --request POST \
-    --header 'content-type: application/json' \
-    --url http://localhost:4000/graphql \
-    --data '{  "query": "mutation { addSensorData(temperature: 25.0, humidity: 50.0, gas: 100.0, gps_lat: 40.7128, gps_lon: -74.0060) { id temperature humidity gas gps_lat gps_lon createdAt } }"}'
-    ```
-- To fetch all recognitions:
+- To fetch all sensors data:
   ```bash
-    curl --request POST \
-    --header 'content-type: application/json' \
-    --url http://localhost:4000/graphql \
-    --data '{"query": "{ allRecognitions { id name quantity createdAt } }" }'
+    curl -X POST http://localhost:4000/ \
+    -H "Content-Type: application/json" \
+    -d '{"query":"{ allSensorData { temperature humidity gas gps_lat gps_lon created_at } }"}'
     ```
-  - To retrive just one record from the recognitions data by id:
+- To fetch a single sensor data acquisition:
   ```bash
-    curl --request POST \
-    --header 'content-type: application/json' \
-    --url http://localhost:4000/graphql \
-    --data '{"query": "{ recognition(id: 1) { id name quantity createdAt } }" }'
+    curl -X POST http://localhost:4000/ \
+    -H "Content-Type: application/json" \
+    -d '{"query":"{ sensorData(gps_lat:45.1234, gps_lon:9.1234, created_at:\"2025-04-24T00:00:00.000Z\") { temperature humidity gas gps_lat gps_lon created_at } }"}'
     ```
-- To add a new object into the database:
+- To fetch all recognized objects:
   ```bash
-    curl --request POST \
-    --header 'content-type: application/json' \
-    --url http://localhost:4000/graphql \
-    --data '{  "query": "mutation { addObject(name: \"object_name\", quantity: 1) { id name quantity createdAt } }"}'
+    curl -X POST http://localhost:4000/ \
+    -H "Content-Type: application/json" \
+    -d '{"query":"{ allRecognitions { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}'
     ```
-- To edit an object recognized info by id:
+  - To fetch just a single recognized object:
   ```bash
-  curl --request POST \
-  --header 'content-type: application/json' \
-  --url http://localhost:4000/graphql \
-  --data '{ "query": "mutation { editObject(id: 1, name: \"new_name\", quantity: 2) { id name quantity createdAt } }"}'
+    curl -X POST http://localhost:4000/ \
+    -H "Content-Type: application/json" \
+    -d '{"query":"{ recognition(gps_lat:45.1234, gps_lon:9.1234, created_at:\"2025-04-24T00:00:00.000Z\") { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}'
+    ```
+- To add a new sensors data acquisition:
+  ```bash
+    curl -X POST http://localhost:4000/ \
+    -H "Content-Type: application/json" \
+    -d '{"query":"mutation { addSensorData(temperature:23.5, humidity:45.2, gas:0.9, gps_lat:45.1234, gps_lon:9.1234, created_at:\"2025-04-24T00:00:00.000Z\") { temperature humidity gas gps_lat gps_lon created_at } }"}'
+    ```
+- To add a recognized object:
+  ```bash
+    curl -X POST http://localhost:4000/ \
+    -H "Content-Type: application/json" \
+    -d '{"query":"mutation { addObject(object_name:\"Bottiglia\", object_quantity:2, gps_lat:45.1234, gps_lon:9.1234, sensor_created_at:\"2025-04-24T00:00:00.000Z\", created_at:\"2025-04-24T00:01:00.000Z\") { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}'
     ```
 
 ## License
