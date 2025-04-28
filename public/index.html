@@ -15,22 +15,22 @@
       {
         'name': 'allSensorData',
         'title': 'To fetch all sensors data',
-        'query': 'curl -X POST http://localhost:4000/“ -H "Content-Type: application/json" -d \'{"query":"{ allSensorData { temperature humidity gas gps_lat gps_lon created_at } }"}\''
+        'query': 'curl -X POST http://localhost:4000/ -H "Content-Type: application/json" -d \'{"query":"{ allSensorData { temperature humidity gas gps_lat gps_lon created_at } }"}\''
       },
       {
         'name': 'sensorData',
         'title': 'To fetch a sensor data',
-        'query': 'curl -X POST http://localhost:4000/“ -H "Content-Type: application/json" -d \'{"query":"{ sensorData(gps_lat:45.1234, gps_lon:9.1234, created_at:\"2025-04-24T00:00:00.000Z\") { temperature humidity gas gps_lat gps_lon created_at } }"}\''
+        'query': 'curl -X POST http://localhost:4000/ -H "Content-Type: application/json" -d \'{"query":"{ sensorData(gps_lat:45.1234, gps_lon:9.1234, created_at:\"2025-04-24T00:00:00.000Z\") { temperature humidity gas gps_lat gps_lon created_at } }"}\''
       },
       {
         'name': 'allRecognitions',
         'title': 'To fetch all recognized objects',
-        'query': 'curl -X POST http://localhost:4000/“ -H "Content-Type: application/json" -d \'{"query":"{ allRecognitions { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}\''
+        'query': 'curl -X POST http://localhost:4000/ -H "Content-Type: application/json" -d \'{"query":"{ allRecognitions { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}\''
       },
       {
         'name': 'recognition',
         'title': 'To fetch an object',
-        'query': 'curl -X POST http://localhost:4000/“ -H "Content-Type: application/json" -d \'{"query":"{ recognition(gps_lat:45.1234, gps_lon:9.1234, created_at:\"2025-04-24T00:00:00.000Z\") { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}\'\''
+        'query': 'curl -X POST http://localhost:4000/ -H "Content-Type: application/json" -d \'{"query":"{ recognition(gps_lat:45.1234, gps_lon:9.1234, created_at:\"2025-04-24T00:00:00.000Z\") { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}\''
       }
     ]
 
@@ -38,12 +38,12 @@
       {
         'name': 'addSensorData',
         'title': 'To add a sensors data acquisition',
-        'query': 'curl -X POST http://localhost:4000/“ -H "Content-Type: application/json" -d \'{"query":"mutation { addSensorData(temperature:23.5, humidity:45.2, gas:0.9, gps_lat:45.1234, gps_lon:9.1234, created_at:\"2025-04-24T00:00:00.000Z\") { temperature humidity gas gps_lat gps_lon created_at } }"}\''
+        'query': 'curl -X POST http://localhost:4000/ -H "Content-Type: application/json" -d \'{"query":"mutation { addSensorData(temperature:23.5, humidity:45.2, gas:0.9, gps_lat:45.1234, gps_lon:9.1234, created_at:\"2025-04-24T00:00:00.000Z\") { temperature humidity gas gps_lat gps_lon created_at } }"}\''
       },
       {
         'name': 'addObject',
         'title': 'to add a new recognized object',
-        'query': 'curl -X POST http://localhost:4000/“ -H "Content-Type: application/json" -d \'{"query":"mutation { addObject(object_name:\"Bottiglia\", object_quantity:2, gps_lat:45.1234, gps_lon:9.1234, sensor_created_at:\"2025-04-24T00:00:00.000Z\", created_at:\"2025-04-24T00:01:00.000Z\") { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}\''
+        'query': 'curl -X POST http://localhost:4000/ -H "Content-Type: application/json" -d \'{"query":"mutation { addObject(object_name:\"Bottiglia\", object_quantity:2, gps_lat:45.1234, gps_lon:9.1234, sensor_created_at:\"2025-04-24T00:00:00.000Z\", created_at:\"2025-04-24T00:01:00.000Z\") { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}\''
       }
     ]
 
