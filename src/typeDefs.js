@@ -24,7 +24,7 @@ const typeDefs = gql`
     sensorData(gps_lat: Float!, gps_lon: Float!, created_at: String): [SensorData!]!
 
     allRecognitions: [Recognitions!]!
-    recognition(gps_lat: Float!, gps_lon: Float!, created_at: String): [Recognitions!]!
+    recognition(gps_lat: Float!, gps_lon: Float!, sensor_created_at: String): [Recognitions!]!
   }
 
   type Mutation {

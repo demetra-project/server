@@ -15,13 +15,16 @@ const resolvers = {
     },
 
     allRecognitions: async () => { return await Recognitions.findAll({ raw: true }); },
-    recognition: async (_, { gps_lat, gps_lon, created_at }) => {
+    recognition: async (_, { gps_lat, gps_lon, sensor_created_at }) => {
       const where = {
         gps_lat: { [Op.between]: [gps_lat - 0.0001, gps_lat + 0.0001] },
         gps_lon: { [Op.between]: [gps_lon - 0.0001, gps_lon + 0.0001] }
       };
 
-      if(created_at) where.created_at = { [Op.gte]: created_at };
+      if (sensor_created_at) {
+          where.sensor_created_at = { [Op.eq]: sensor_created_at };
+        }
+
       return await Recognitions.findAll({ where, raw: true });
     }
   },
