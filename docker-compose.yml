@@ -12,16 +12,14 @@ services:
       - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
-      - ./demetra.sql:/docker-entrypoint-demetra.d/demetra.sql
+      - ./docker/demetra.sql:/docker-entrypoint-demetra.d/demetra.sql
 
   server:
-    image: node:18
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: demetra_server
     restart: always
-    working_dir: /app
-    volumes:
-      - .:/app
-    command: sh -c "npm install && if [ \"$NODE_ENV\" = 'production' ]; then npm run start:prod; else npm start; fi"
     ports:
       - "4000:4000"
     depends_on:
@@ -34,6 +32,8 @@ services:
       NODE_ENV: ${NODE_ENV}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_DIALECT: ${DB_DIALECT}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+
 
 volumes:
   db_data:
