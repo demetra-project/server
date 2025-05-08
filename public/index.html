@@ -1,89 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Demetra Server</title>
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Demetra Dashboard </title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
-<body>
-  <div id="container">
-    <h1>Queries and Mutations for Sensors and Objects Data</h1>
+<body class="bg-black">
 
-  <script>
-    const queries = [
-      {
-        'name': 'allSensorData',
-        'title': 'To fetch all sensors data',
-        'query': 'curl -X POST http://localhost:4000/ -H "Content-Type: application/json" -d \'{"query":"{ allSensorData { temperature humidity gas gps_lat gps_lon created_at } }"}\''
-      },
-      {
-        'name': 'sensorData',
-        'title': 'To fetch a sensor data',
-        'query': 'curl -X POST http://localhost:4000/ -H "Content-Type: application/json" -d \'{"query":"{ sensorData(gps_lat:45.1234, gps_lon:9.1234, created_at:\"2025-04-24T00:00:00.000Z\") { temperature humidity gas gps_lat gps_lon created_at } }"}\''
-      },
-      {
-        'name': 'allRecognitions',
-        'title': 'To fetch all recognized objects',
-        'query': 'curl -X POST http://localhost:4000/ -H "Content-Type: application/json" -d \'{"query":"{ allRecognitions { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}\''
-      },
-      {
-        'name': 'recognition',
-        'title': 'To fetch an object',
-        'query': 'curl -X POST http://localhost:4000/ -H "Content-Type: application/json" -d \'{"query":"{ recognition(gps_lat:45.1234, gps_lon:9.1234, created_at:\"2025-04-24T00:00:00.000Z\") { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}\''
-      }
-    ]
+    <h1 class="text-3xl text-white text-center font-bold underline my-10"> Demetra Dashboard </h1>
 
-    mutations = [
-      {
-        'name': 'addSensorData',
-        'title': 'To add a sensors data acquisition',
-        'query': 'curl -X POST http://localhost:4000/ -H "Content-Type: application/json" -d \'{"query":"mutation { addSensorData(temperature:23.5, humidity:45.2, gas:0.9, gps_lat:45.1234, gps_lon:9.1234, created_at:\"2025-04-24T00:00:00.000Z\") { temperature humidity gas gps_lat gps_lon created_at } }"}\''
-      },
-      {
-        'name': 'addObject',
-        'title': 'to add a new recognized object',
-        'query': 'curl -X POST http://localhost:4000/ -H "Content-Type: application/json" -d \'{"query":"mutation { addObject(object_name:\"Bottiglia\", object_quantity:2, gps_lat:45.1234, gps_lon:9.1234, sensor_created_at:\"2025-04-24T00:00:00.000Z\", created_at:\"2025-04-24T00:01:00.000Z\") { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}\''
-      }
-    ]
+    <!-- <header>
+        <div class="logo">
+            <img src="" alt="">
+            <p class="text-white text-center"> Demetra </p>
+        </div>
+    </header> -->
 
-    function copyToClipboard(id, button) {
-      const text = document.getElementById(id).innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        button.disabled = true;
-        button.textContent = 'Copied';
-        setTimeout(() => { button.textContent = 'Copy'; button.disabled = false; }, 1500);
-      }).catch(err => console.error('Copy failed:', err));
-    }
+    <main class="grid md:grid-cols-2 md:grid-flow-col gap-5 p-5">
+        <div class="sensor-data grid md:grid-cols-3 gap-5">
+            <div class="card temperature flex items-center justify-center rounded-xl p-5 border-solid border-2 border-white/25 hover:border-[#F15454]/75 duration-250">
+                <h3 class="text-center text-white">Temperature <br> <span> Not Available </span></h3>
+            </div>
 
-    createCard = (query) => {
-      const queryDiv = document.createElement('div');
-      const header = document.createElement('h2');
-      const codeBlock = document.createElement('div');
-      const copyButton = document.createElement('button');
-      const preElement = document.createElement('pre');
+            <div class="card humidity flex items-center justify-center rounded-xl p-5 border-solid border-2 border-white/25 hover:border-[#F15454]/75 duration-250">
+                <h3 class="text-center text-white">Humidity <br> <span> Not Available </span></h3>
+            </div>
 
-      queryDiv.classList.add('query');
-      header.textContent = query.title;
-      queryDiv.appendChild(header);
-      codeBlock.classList.add('code-block');
-      copyButton.classList.add('copy-btn');
-      copyButton.textContent = 'Copy';
-      copyButton.addEventListener('click', function() {
-        copyToClipboard(query.name, copyButton);
-      });
-      codeBlock.appendChild(copyButton);
-      preElement.id = query.name;
-      preElement.textContent = query.query;
+            <div class="card gas flex items-center justify-center rounded-xl p-5 border-solid border-2 border-white/25 hover:border-[#F15454]/75 duration-250">
+                <h3 class="text-center text-white">CO2/CH4 Concentration <br> <span> Not Available </span></h3>
+            </div>
+        </div>
 
-      codeBlock.appendChild(preElement);
-      queryDiv.appendChild(codeBlock);
-      container.appendChild(queryDiv);
-    }
+        <div class="card objects rounded-xl p-5 border-solid border-2 border-white/25 hover:border-[#F15454]/75 duration-250">
+            <h3 class="text-center text-white">Objects recognized</h3>
+            <span class="block w-full text-center text-white"> Not Available </span>
+            <ul class="text-white list-disc list-inside ml-5"></ul>
+        </div>
 
-    queries.forEach(query => { createCard(query) });
-    mutations.forEach(query => { createCard(query) });
-  </script>
+        <div class="card coordinates row-span-5 rounded-xl p-5 border-solid border-2 border-white/25 hover:border-[#F15454]/75">
+            <h3 class="text-center text-white mb-5">Coordinates</h3>
+            <div id="map" class="w-full h-[calc(45vh-45px)]"></div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
 
 </body>
 </html>

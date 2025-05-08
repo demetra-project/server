@@ -1,39 +1,8 @@
-body{
-    font-family: Arial, sans-serif;
-    background-color: #010101;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body{background-color: var(--background);}
+
+:root{
+    --background: #222;
+    --dark-charcoal: #2F2F2F;
 }
 
-#container{padding: 25px;}
-h1{text-align: center; color: white; margin: 25px 0 50px 0;}
-.query{margin: 20px 0;}
-.query h2{color: #eee; font-size: 20px;}
-
-.code-block {
-  background-color: #1f1f1f;
-  color: #bebebe;
-  padding: 15px 75px 15px 15px;
-  border-radius: 5px;
-  font-family: monospace;
-  margin: 10px 0;
-  position: relative;
-}
-pre{margin: 0; white-space: pre-wrap; word-wrap: break-word;}
-
-.copy-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #4CAF50;
-    color: white;
-    padding: 5px 10px;
-    font-size: 14px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-.copy-btn:hover{background-color: #45a049;}
-.copy-btn:active{background-color: #387a34;}
+.card{background: var(--dark-charcoal);}
