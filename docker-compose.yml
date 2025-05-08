@@ -2,7 +2,7 @@ services:
   db:
     image: mysql:8.0
     container_name: demetra_db
-    restart: always
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
@@ -13,13 +13,14 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./docker/demetra.sql:/docker-entrypoint-demetra.d/demetra.sql
+    networks:
+      - backend
 
   server:
     build:
       context: .
-      dockerfile: Dockerfile
     container_name: demetra_server
-    restart: always
+    restart: unless-stopped
     ports:
       - "4000:4000"
     depends_on:
@@ -33,7 +34,12 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_DIALECT: ${DB_DIALECT}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    networks:
+      - backend
 
 
 volumes:
   db_data:
+
+networks:
+  backend:
