@@ -1,5 +1,5 @@
 // server_url = 'http://localhost:400/'
-server_url = 'https://demetra.serveo.net/'
+server_url = 'https://demetra.loophole.site/'
 
 let [gps_lat, gps_lon, tempTimestamp] = [0, 0, 0]
 queryToRetrieveAllSensorsData = `{ allSensorData { temperature humidity gas gps_lat gps_lon created_at } }`

@@ -72,7 +72,7 @@ Here are some examples on how to use Demetra server using [cURL](https://curl.se
   ```bash
     curl -X POST http://localhost:4000/ \
     -H "Content-Type: application/json" \
-    -d '{"query":"{ recognition(gps_lat:45.1234, gps_lon:9.1234, created_at:\"2025-04-24T00:00:00.000Z\") { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}'
+    -d '{"query":"{ recognition(gps_lat:45.1234, gps_lon:9.1234, sensor_created_at:\"2025-04-24T00:00:00.000Z\") { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}'
     ```
 - To add a new sensors data acquisition:
   ```bash
@@ -84,7 +84,7 @@ Here are some examples on how to use Demetra server using [cURL](https://curl.se
   ```bash
     curl -X POST http://localhost:4000/ \
     -H "Content-Type: application/json" \
-    -d '{"query":"mutation { addObject(object_name:\"Bottiglia\", object_quantity:2, gps_lat:45.1234, gps_lon:9.1234, sensor_created_at:\"2025-04-24T00:00:00.000Z\", created_at:\"2025-04-24T00:01:00.000Z\") { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}'
+    -d '{"query":"mutation { addObject(object_name:\"Bottle\", object_quantity:2, gps_lat:45.1234, gps_lon:9.1234, sensor_created_at:\"2025-04-24T00:00:00.000Z\", created_at:\"2025-04-24T00:01:00.000Z\") { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}'
     ```
 
 ## License
