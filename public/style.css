@@ -5,4 +5,64 @@ body{background-color: var(--background);}
     --dark-charcoal: #2F2F2F;
 }
 
+button{cursor: pointer;}
+
+
+
+/*** NAVBAR ***/
+nav{
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+nav button{height: 45px; width: 45px;}
+nav h1{width: max-content; line-height: inherit;}
+
+nav .drone-selection{display: flex; gap: 5px; align-items: center;}
+nav .drone-selection button{height: 25px; width: 25px;}
+nav .drone-selection .right-arrow{transform: rotateY(180deg);}
+
+/*** MAIN ***/
+main.open{margin-left: 250px;}
+main.closed{margin-left: 0;}
+main{padding: 20px; transition: margin-left .25s;}
+
+
+/*** CARDS  ***/
 .card{background: var(--dark-charcoal);}
+
+
+/*** MENU ***/
+.menu{
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 100px;
+  background: var(--dark-charcoal);
+  z-index: 1;
+}
+.menu a{
+  display: block;
+  padding: 10px 10px 10px 25px;
+  font-size: 20px;
+  color: white;
+  transition: 0.3s;
+}
+.menu a:hover{color: #F15454;}
+.menu.open{width: 250px;}
+.menu.closed{width: 0;}
+.menu .closeBtn{
+    width: 40px; height: 40px;
+    position: absolute;
+    top: 25px; left: 30px;
+    font-size: 50px;
+}
+
+
+
+/*** RESPONSIVE ***/
+@media screen and (max-height: 450px) {
+  .menu {padding-top: 15px;}
+  .menu a {font-size: 18px;}
+}

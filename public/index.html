@@ -11,16 +11,34 @@
 </head>
 <body class="bg-black">
 
-    <h1 class="text-3xl text-white text-center font-bold underline my-10"> Demetra Dashboard </h1>
-
-    <!-- <header>
-        <div class="logo">
-            <img src="" alt="">
-            <p class="text-white text-center"> Demetra </p>
+    <nav>
+        <button class="hamburger-menu" onclick="toggleMenu()">
+            <img src="assets/icons/hamburger-menu-white.svg" alt="open-menu">
+        </button>
+        <div class="drone-selection">
+            <button class="left-arrow">
+                <img src="assets/icons/chevron-white.svg" alt="">
+            </button>
+            <h1 class="text-3xl text-white text-right font-bold"> Network/01 </h1>
+            <button class="right-arrow">
+                <img src="assets/icons/chevron-white.svg" alt="">
+            </button>
         </div>
-    </header> -->
+    </nav>
 
-    <main class="grid md:grid-cols-2 md:grid-flow-col gap-5 p-5">
+    <aside id="menu" class="menu w-0 overflow-hidden transition-all duration-300 text-white">
+      <!-- <button class="closeBtn" onclick="toggleMenu()">&times;</button> -->
+      <button class="closeBtn" onclick="toggleMenu()">
+          <img src="assets/icons/close-white.svg" alt="close-menu">
+      </button>
+      <a href="">Dashboard</a>
+      <a href="">Networks</a>
+      <a href="">Account</a>
+      <a href="">Team</a>
+    </aside>
+
+
+    <main class="grid md:grid-cols-2 md:grid-flow-col gap-5 gap-x-4 p-5">
         <div class="sensor-data grid md:grid-cols-3 gap-5">
             <div class="card temperature flex items-center justify-center rounded-xl p-5 border-solid border-2 border-white/25 hover:border-[#F15454]/75 duration-250">
                 <h3 class="text-center text-white">Temperature <br> <span> Not Available </span></h3>

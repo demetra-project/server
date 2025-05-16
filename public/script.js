@@ -2,6 +2,7 @@
 server_url = 'https://demetra.loophole.site/'
 
 let [gps_lat, gps_lon, tempTimestamp] = [0, 0, 0]
+let menuStatus = "closed";
 queryToRetrieveAllSensorsData = `{ allSensorData { temperature humidity gas gps_lat gps_lon created_at } }`
 queryToRetrieveAllRecognitions = `{ allRecognitions { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }`
 queryToRetrieveAllCoordinates = `{ allRecognitions { id gps_lat gps_lon sensor_created_at created_at } }`
@@ -60,15 +61,16 @@ retrieveData = async() => {
   requestToServer(queryToRetrieveAllSensorsData)
     .then(data => {
       if(data && data.data && data.data.allSensorData && data.data.allSensorData.length > 0){
-        lastItem = data.data.allSensorData.length - 1;
-        temperatureText.textContent = `${data.data.allSensorData[lastItem].temperature.toFixed(2)}°C`;
-        humidityText.textContent = `${data.data.allSensorData[lastItem].humidity.toFixed(2)}%`;
-        gasText.textContent = `${data.data.allSensorData[lastItem].gas.toFixed(2)}%`;
-        tempTimestamp = new Date(Number(data.data.allSensorData[lastItem].created_at)).toISOString();
+        data.data.allSensorData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        lastItem = data.data.allSensorData[0];
+        temperatureText.textContent = `${lastItem.temperature.toFixed(2)}°C`;
+        humidityText.textContent = `${lastItem.humidity.toFixed(2)}%`;
+        gasText.textContent = `${lastItem.gas.toFixed(2)}%`;
+        tempTimestamp = new Date(Number(lastItem.created_at)).toISOString();
 
-        if(gps_lat != data.data.allSensorData[lastItem].gps_lat && gps_lon != data.data.allSensorData[lastItem].gps_lon){
-          gps_lat = data.data.allSensorData[lastItem].gps_lat;
-          gps_lon = data.data.allSensorData[lastItem].gps_lon;
+        if(gps_lat != lastItem.gps_lat && gps_lon != lastItem.gps_lon){
+          gps_lat = lastItem.gps_lat;
+          gps_lon = lastItem.gps_lon;
           marker.setLatLng([gps_lat, gps_lon]);
           map.setView([gps_lat, gps_lon], 15);
           getPlaceName(gps_lat, gps_lon);
@@ -122,3 +124,23 @@ retrieveData = async() => {
 
 retrieveData()
 setInterval(() => { retrieveData() }, 15000)
+
+
+
+
+// MENU
+function toggleMenu() {
+  menuStatus = (menuStatus === "closed") ? "open" : "closed";
+  updateMenu();
+}
+
+function updateMenu() {
+  const menu = document.getElementById("menu");
+  const main = document.querySelector("main");
+
+  menu.classList.remove("open", "closed");
+  main.classList.remove("open", "closed");
+
+  menu.classList.add(menuStatus);
+  main.classList.add(menuStatus);
+}
