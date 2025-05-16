@@ -40,7 +40,7 @@ main{padding: 20px; transition: margin-left .25s;}
   left: 0;
   padding-top: 100px;
   background: var(--dark-charcoal);
-  z-index: 1;
+  z-index: 5000;
 }
 .menu a{
   display: block;
@@ -62,7 +62,18 @@ main{padding: 20px; transition: margin-left .25s;}
 
 
 /*** RESPONSIVE ***/
-@media screen and (max-height: 450px) {
-  .menu {padding-top: 15px;}
-  .menu a {font-size: 18px;}
+@media screen and (max-height: 450px){
+  .menu {padding-top: 75px;}
+  .menu a{font-size: 18px;}
+  .menu.open{width: 100%; height: 100%;}
+
+  main.open{margin-left: 0;}
+}
+
+@media screen and (max-width: 525px){
+    nav{flex-direction: column; padding-bottom: 0;}
+    .drone-selection{justify-content: center; margin-top: 15px;}
+
+    .menu.open{width: 100%; height: 100%;}
+    main.open{margin-left: 0;}
 }

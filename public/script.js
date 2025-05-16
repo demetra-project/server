@@ -143,4 +143,7 @@ function updateMenu() {
 
   menu.classList.add(menuStatus);
   main.classList.add(menuStatus);
+
+  if(menuStatus === "open") document.body.classList.add("overflow-hidden");
+  else document.body.classList.remove("overflow-hidden");
 }
