@@ -38,18 +38,17 @@ requestToServer = async(query) => {
 }
 
 showPlace = async(lat, lon) => {
-  try {
-
-  }
+  try{ }
   catch(err){ console.error('Errore:', err); }
 }
 
 getPlaceName = async (lat, lon) => {
-  try {
+  try{
     const data = await (await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&addressdetails=1`)).json();
     const placeName = data?.address?.city || data?.address?.town || data?.address?.village || "Nome non trovato";
     coordinates.querySelector('h3').innerHTML = `<strong>${placeName}</strong>: Lat: ${lat}; Lon: ${lon}`;
-  } catch (err) {
+  }
+  catch(err){
     console.error('Errore:', err);
     coordinates.querySelector('h3').innerHTML = `<strong>Errore nel geocoding</strong>`;
   }
@@ -147,3 +146,14 @@ function updateMenu() {
   if(menuStatus === "open") document.body.classList.add("overflow-hidden");
   else document.body.classList.remove("overflow-hidden");
 }
+
+// FULLSCREEN MODE
+document.addEventListener("keydown", ({ key, repeat }) => {
+  if(key.toLowerCase() === "f" && !repeat){
+    const d = document, e = d.documentElement;
+    (d.fullscreenElement || d.webkitFullscreenElement
+      ? d.exitFullscreen || d.webkitExitFullscreen
+      : e.requestFullscreen || e.webkitRequestFullscreen
+    ).call(d.fullscreenElement ? d : e);
+  }
+});
