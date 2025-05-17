@@ -60,7 +60,7 @@ retrieveData = async() => {
   requestToServer(queryToRetrieveAllSensorsData)
     .then(data => {
       if(data && data.data && data.data.allSensorData && data.data.allSensorData.length > 0){
-        data.data.allSensorData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        data.data.allSensorData.sort((a, b) => Number(b.created_at) - Number(a.created_at));
         lastItem = data.data.allSensorData[0];
         temperatureText.textContent = `${lastItem.temperature.toFixed(2)}°C`;
         humidityText.textContent = `${lastItem.humidity.toFixed(2)}%`;
@@ -75,7 +75,7 @@ retrieveData = async() => {
           getPlaceName(gps_lat, gps_lon);
         }
 
-        queryToRetrieveAllObjects = `{ recognition(gps_lat: ${gps_lat}, gps_lon: ${gps_lon}, sensor_created_at: "${tempTimestamp}") { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }`;
+        queryToRetrieveAllObjects = `{ recognition(gps_lat: ${gps_lat}, gps_lon: ${gps_lon}) { id object_name object_quantity gps_lat gps_lon created_at } }`;
         return requestToServer(queryToRetrieveAllObjects);
       }
       else console.error("An error occurred:", data);
