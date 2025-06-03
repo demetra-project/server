@@ -2,6 +2,7 @@ const { sequelize } = require('./db.config');
 const { DataTypes } = require('sequelize');
 
 const SensorData = sequelize.define('sensors_data', {
+    id: { type: DataTypes.INTEGER, autoIncrement: true, unique: true },
     temperature: DataTypes.DECIMAL(10, 2),
     humidity: DataTypes.DECIMAL(10, 2),
     gas: DataTypes.DECIMAL(10, 2),

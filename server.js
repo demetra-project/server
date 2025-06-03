@@ -1,6 +1,7 @@
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const { sequelize } = require('./src/db.config');
+const initializeExampleData = require('./src/initializeExampleData');
 const typeDefs = require('./src/typeDefs');
 const resolvers = require('./src/resolvers');
 const express = require('express');
@@ -40,6 +41,7 @@ async function startServer(){
     await sequelize.authenticate();
     await sequelize.sync({ force: process.env.NODE_ENV !== 'production' }); // if development, drop and recreate tables
     console.log('Database connected successfully');
+    if(process.env.NODE_ENV !== 'production') await initializeExampleData();
   }
   catch(error){ console.error('Database connection error:', error); }
 
