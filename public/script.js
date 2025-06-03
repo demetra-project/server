@@ -1,5 +1,5 @@
 // server_url = 'http://localhost:400/'
-server_url = 'https://demetra.loophole.site/'
+server_url = 'https://demetra.serveo.net/'
 
 let [gps_lat, gps_lon, tempTimestamp] = [0, 0, 0]
 let menuStatus = "closed";
@@ -64,7 +64,7 @@ retrieveData = async() => {
         lastItem = data.data.allSensorData[0];
         temperatureText.textContent = `${lastItem.temperature.toFixed(2)}°C`;
         humidityText.textContent = `${lastItem.humidity.toFixed(2)}%`;
-        gasText.textContent = `${lastItem.gas.toFixed(2)}%`;
+        gasText.textContent = `${lastItem.gas.toFixed(2)}ppm`;
         tempTimestamp = new Date(Number(lastItem.created_at)).toISOString();
 
         if(gps_lat != lastItem.gps_lat && gps_lon != lastItem.gps_lon){
