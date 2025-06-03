@@ -80,11 +80,23 @@ Here are some examples on how to use Demetra server using [cURL](https://curl.se
     -H "Content-Type: application/json" \
     -d '{"query":"mutation { addSensorData(temperature:23.5, humidity:45.2, gas:0.9, gps_lat:45.1234, gps_lon:9.1234, created_at:\"2025-04-24T00:00:00.000Z\") { temperature humidity gas gps_lat gps_lon created_at } }"}'
     ```
+- To edit a sensor data acquisition:
+  ```bash
+    curl -X POST http://localhost:4000/ \
+    -H "Content-Type: application/json" \
+    -d '{"query": "mutation { editSensorData(gps_lat: 40.8448, gps_lon: -73.8648, created_at: \"2025-06-03T10:25:00Z\", temperature: 25.0, humidity: 65.0, gas: 0.035) { gps_lat gps_lon created_at temperature humidity gas } }" }'
+    ```
 - To add a recognized object:
   ```bash
     curl -X POST http://localhost:4000/ \
     -H "Content-Type: application/json" \
     -d '{"query":"mutation { addObject(object_name:\"Bottle\", object_quantity:2, gps_lat:45.1234, gps_lon:9.1234, sensor_created_at:\"2025-04-24T00:00:00.000Z\", created_at:\"2025-04-24T00:01:00.000Z\") { id object_name object_quantity gps_lat gps_lon sensor_created_at created_at } }"}'
+    ```
+- To edit a recognized object:
+  ```bash
+    curl -X POST http://localhost:4000/ \
+    -H "Content-Type: application/json" \
+    -d '{"query": "mutation { editRecognition(id: 1, object_name: \"Bottle\", object_quantity: 12) { id object_name object_quantity } }" }'
     ```
 
 ## License
