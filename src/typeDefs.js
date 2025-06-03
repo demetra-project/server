@@ -2,6 +2,7 @@ const { gql } = require('graphql-tag');
 
 const typeDefs = gql`
   type SensorData {
+    id: ID!
     temperature: Float!
     humidity: Float!
     gas: Float!
@@ -37,6 +38,15 @@ const typeDefs = gql`
       created_at: String!
     ): SensorData!
 
+    editSensorData(
+      gps_lat: Float!
+      gps_lon: Float!
+      created_at: String!
+      temperature: Float
+      humidity: Float
+      gas: Float
+    ): SensorData
+
     addObject(
       object_name: String!,
       object_quantity: Int!,
@@ -44,6 +54,12 @@ const typeDefs = gql`
       gps_lon: Float!,
       sensor_created_at: String!,
       created_at: String
+    ): Recognitions!
+
+    editRecognition(
+      id: ID!
+      object_name: String
+      object_quantity: Int
     ): Recognitions!
   }
 `;

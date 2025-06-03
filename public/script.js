@@ -1,5 +1,5 @@
-// server_url = 'http://localhost:400/'
-server_url = 'https://demetra.serveo.net/'
+server_url = 'http://localhost:4000/'
+// server_url = 'https://demetra.serveo.net/'
 
 let [gps_lat, gps_lon, tempTimestamp] = [0, 0, 0]
 let menuStatus = "closed";

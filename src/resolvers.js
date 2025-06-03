@@ -21,9 +21,7 @@ const resolvers = {
         gps_lon: { [Op.between]: [gps_lon - 0.0001, gps_lon + 0.0001] }
       };
 
-      if (sensor_created_at) {
-          where.sensor_created_at = { [Op.eq]: sensor_created_at };
-        }
+      if(sensor_created_at) where.sensor_created_at = { [Op.eq]: sensor_created_at };
 
       return await Recognitions.findAll({ where, raw: true });
     }
@@ -34,10 +32,20 @@ const resolvers = {
       const finalCreatedAt = created_at || new Date().toISOString();
       const [sensorData, created] = await SensorData.findOrCreate({
         where: { gps_lat, gps_lon, created_at: finalCreatedAt },
-        defaults: { temperature, humidity, gas }
+        defaults: { temperature, humidity, gas },
       });
 
       if(!created) await sensorData.update({ temperature, humidity, gas });
+      return sensorData;
+    },
+
+    editSensorData: async (_, { gps_lat, gps_lon, created_at, temperature, humidity, gas }) => {
+      const sensorData = await SensorData.findOne({
+        where: { gps_lat, gps_lon, created_at }
+      });
+
+      if(!sensorData) throw new Error(`SensorData with parsed values not found.`);
+      await sensorData.update({ temperature, humidity, gas });
       return sensorData;
     },
 
@@ -51,7 +59,13 @@ const resolvers = {
       return recognition;
     },
 
-  }
+    editRecognition: async (_, { id, object_name, object_quantity }) => {
+      const recognition = await Recognitions.findByPk(id);
+      if(!recognition) throw new Error(`Recognition with id ${id} not found.`);
+      await recognition.update({ object_name, object_quantity });
+      return recognition;
+    }
+  },
 };
 
 module.exports = resolvers;
